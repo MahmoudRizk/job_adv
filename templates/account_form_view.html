@@ -1,0 +1,50 @@
+<html>
+  <body>
+    <h1>Create New Account</h1>
+    <form name="new_account_form" action="{{ url_for('account_create') }}" onsubmit="return(validateForm())" method="post" enctype="multipart/form-data">
+      <label for="user_name">User name:</label>
+      <input type="text" id="user_name" name="user_name" required><br>
+      <label for="email_address">Email address:</label>
+      <input type="text" id="email_address" name="email_address" required><br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required><br>
+      <label for="birthday">Birth date:</label>
+      <input type="date" id="birth_date" name="birth_date" required><br>
+      <label for="is_employee">Is Employee:</label>
+      <input type="checkbox" id="is_employee" name="is_employee"><br>
+      <label for="is_employer">Is Employer:</label>
+      <input type="checkbox" id="is_employer" name="is_employer"><br>
+      <label for="is_admin">Is Admin:</label>
+      <input type="checkbox" id="is_admin" name="is_admin"><br>
+      <input type="file" id="cv" name="cv" required><br>
+      <input type="submit" value="Submit">
+    </form>
+    <script type="text/javascript">
+
+      function checkFileSize(){
+        file_size = document.getElementById('cv').files[0].size /1024/1024
+        if (file_size > 1.5){
+          return false;
+        }
+        return true;
+      }
+      function checkValideEmail(){
+        email = document.getElementById('email_address').value;
+        re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+      }
+      function validateForm(){
+        is_valid = true;
+        if(!checkValideEmail()){
+          is_valid = false;
+          window.alert("Invalid Email address");
+        }
+        if(!checkFileSize()){
+          is_valid = false;
+          window.alert("CV file exceeds limits, 1.5 MB");
+        }
+        return is_valid;
+      }
+    </script>
+  </body>
+</html>
