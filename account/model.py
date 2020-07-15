@@ -1,6 +1,9 @@
 from ..app import app, db
 
-from flask_login import LoginManager, UserMixin, login_user
+from flask_login import (LoginManager, current_user, login_required,
+                             login_user, logout_user, UserMixin,
+                             confirm_login, fresh_login_required)
+from flask import session
 
 
 class Account(db.Model, UserMixin):
@@ -30,3 +33,27 @@ class Account(db.Model, UserMixin):
     def create(self):
         db.session.add(self)
         db.session.commit()
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def is_authenticated(self):
+        return True
+
+
+
+login_manager = LoginManager()
+
+login_manager.login_view = "login"
+login_manager.login_message = u"Please log in to access this page."
+login_manager.refresh_view = "reauth"
+
+@login_manager.user_loader
+def load_user(id):
+    return Account.query.filter_by(id=id).first()
+
+
+login_manager.setup_app(app)

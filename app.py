@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
@@ -13,8 +13,8 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 @app.route('/')
-def hello_world():
-    return "Hello World"
+def app_entry():
+    return redirect(url_for('job'))
 
 if __name__ == '__main__':
     app.run()

@@ -6,3 +6,6 @@ def render_table_view(rows):
 
 def render_form_view():
     return render_template('account_form_view.html')
+
+def render_login_view():
+    return render_template('login.html')

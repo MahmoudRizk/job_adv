@@ -1,13 +1,38 @@
 from ..app import app
 from .model import Account
-from .view import render_table_view, render_form_view
+from .view import render_table_view, render_form_view, render_login_view
 
-from flask import request, send_file
+from flask import request, send_file, redirect, url_for, session
+from flask_login import login_required, login_user, logout_user
 from werkzeug.utils import secure_filename
 
 import os
 
+@app.route('/login', methods=['GET', 'POST'])
+def login(*args, **kwargs):
+    user = None
+    next = None
+    if request.method == 'POST':
+        user_name = request.form['user_name']
+        password = request.form['password']
+        user = Account.query.filter_by(user_name=user_name, password=password).first()
+        if user:
+            login_user(user)
+            next = request.args.get('next')
+            return redirect(next or url_for('job'))
+
+        return render_login_view()
+
+    elif request.method == 'GET':
+        return render_login_view()
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('job'))
+
 @app.route('/account')
+@login_required
 def account():
     query = Account.query.all()
 
