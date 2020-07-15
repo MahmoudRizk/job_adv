@@ -2,11 +2,13 @@ from flask import Flask, redirect, url_for
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
+from os import environ, path
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://mahmoudrizk:12345@localhost:5432/job_adv'
-app.config['SECRET_KEY'] = 'secret-key-goes-here'
-app.config['UPLOAD_FOLDER'] = '/home/mahmoudrizk/'
-app.config['MAX_CONTENT_PATH'] = 1000000
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('SQLALCHEMY_DATABASE_URI')
+app.config['SECRET_KEY'] = environ.get('SECRET_KEY')
+app.config['UPLOAD_FOLDER'] = environ.get('UPLOAD_FOLDER')
+app.config['MAX_CONTENT_PATH'] = environ.get('MAX_CONTENT_PATH')
 
 
 db = SQLAlchemy(app)
