@@ -1,5 +1,10 @@
 {% extends "base.html"%}
 {% block content %}
+    {% if error_message%}
+      <div>
+        <p style="color: red;">{{error_message}}</p>
+      </div>
+    {% endif %}
     <form name="new_account_form" action="{{ url_for('account_create') }}" onsubmit="return(validateForm())" method="post" enctype="multipart/form-data">
       <h4>Create New Account</h4>
       <label for="user_name">User name:</label><br>
@@ -14,31 +19,33 @@
       <input type="file" id="cv" name="cv" required><br>
       <input type="submit" value="Submit">
     </form>
-    <script type="text/javascript">
+{% endblock %}
+{% block script %}
+  <script type="text/javascript">
 
-      function checkFileSize(){
-        file_size = document.getElementById('cv').files[0].size /1024/1024
-        if (file_size > 1.5){
-          return false;
-        }
-        return true;
+    function checkFileSize(){
+      file_size = document.getElementById('cv').files[0].size /1024/1024
+      if (file_size > 1.5){
+        return false;
       }
-      function checkValideEmail(){
-        function validateForm(){
-        email = document.getElementById('email_address').value;
-        re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
+      return true;
+    }
+    function checkValideEmail(){
+      email = document.getElementById('email_address').value;
+      re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+    function validateForm(){
+      is_valid = true;
+      if(!checkValideEmail()){
+        is_valid = false;
+        window.alert("Invalid Email address");
       }
-        is_valid = true;
-        if(!checkValideEmail()){
-          is_valid = false;
-          window.alert("Invalid Email address");
-        }
-        if(!checkFileSize()){
-          is_valid = false;
-          window.alert("CV file exceeds limits, 1.5 MB");
-        }
-        return is_valid;
+      if(!checkFileSize()){
+        is_valid = false;
+        window.alert("CV file exceeds limits, 1.5 MB");
       }
-    </script>
+      return is_valid;
+    }
+  </script>
 {% endblock %}
