@@ -1,0 +1,35 @@
+<html>
+  <head>
+    {% block head %}
+      <title>JOB APPLICATION</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {% endblock %}
+  </head>
+  <body>
+    <div id="header">
+      <h1 style="text-align: center;">JOB APP</h1>
+      <nav class="topnav">
+        <button onclick="redirect('job/create')" type="button" name="create_job">Create JOB</button>
+        <button onclick="redirect('job')" type="button" name="show_job">List JOBS</button>
+        <button onclick="redirect('account')" type="button" name="show_job">List Accounts</button>
+        <div class="topnav-right">
+          <button onclick="redirect('login')" type="button" name="log_in">LOG IN</button>
+          <button onclick="redirect('logout')" type="button" name="log_out">LOG OUT</button>
+          <button onclick="redirect('account/create')" type="button" name="create_account">SIGN UP</button>
+        </div>
+      </nav>
+      <hr>
+    </div>
+    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="footer">
+      {% block footer %}
+      &copy; Copyright 2020 by <a href="">MR</a>.
+      {% endblock %}
+    </div>
+  </body>
+  <script>
+    function redirect(path){
+        location.pathname = path;
+    }
+  </script>
+</html>

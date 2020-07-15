@@ -1,10 +1,11 @@
-<html>
-  <h1>New Job Form</h1>
+{% extends "base.html"%}
+{% block content %}
   <form name="new_job_form" action="{{ url_for('job_create') }}" method="post">
+    <h4>New Job Form</h4>
     <label for="title">Title:</label><br>
     <input type="text" id="title" name="title" required><br>
     <label for="title">Description:</label><br>
     <textarea rows="10" cols="50" id="description" name="description" required></textarea><br>
     <input type="submit" Vame="Submit"/>
   </form>
-</html>
+{% endblock %}

@@ -1,4 +1,5 @@
-<html>
+{% extends "base.html"%}
+{% block content %}
   <h1>Job List</h1>
   {% for row in rows %}
     <div id={{row.id}}>
@@ -9,4 +10,4 @@
       <hr>
     </div>
   {% endfor %}
-</html>
+{% endblock %}

@@ -1,0 +1,28 @@
+body {
+  background-color: #f1f1f1;
+}
+
+#header {
+  background-color: #666;
+}
+
+#footer{
+  background-color: #777;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+}
+
+.topnav-right {
+  float: right;
+}
+
+form {
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  padding: 10px;
+}
