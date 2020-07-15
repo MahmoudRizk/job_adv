@@ -1,7 +1,15 @@
 <html>
   <head></head>
   <body>
-    <h1>TEST 1234</h1>
-    <h2>TEST VARAIBLE: <span>{{test_var}}</span></h2>
+    <h1>Accounts list</h1>
+    {% for row in rows %}
+      <div>
+        <span>User name:{{row.user_name}}</span><br>
+        <span>Email: {{row.email_address}}</span><br>
+        <span>Birth date: {{row.birth_date}}</span><br>
+        <a href={{row.cv_path}} download>CV</a>
+        <hr>
+      </div>
+    {% endfor %}
   </body>
 </html>
