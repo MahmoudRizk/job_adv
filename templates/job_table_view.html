@@ -1,0 +1,11 @@
+<html>
+  <h1>Job List</h1>
+  {% for row in rows %}
+    <div id={{row.id}}>
+      <h4>{{row.title}}</h4>
+      <textarea rows="10" cols="50" readonly style="resize: none;">{{row.description}}</textarea><br>
+      <button type="button">Apply</button>
+      <hr>
+    </div>
+  {% endfor %}
+</html>
