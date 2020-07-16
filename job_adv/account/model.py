@@ -18,9 +18,10 @@ class Account(db.Model, UserMixin):
     is_admin = db.Column(db.Boolean())
     cv_path = db.Column(db.String(500))
     birth_date = db.Column(db.Date())
+    social_id = db.Column(db.String(64), nullable=False, unique=True)
 
-
-    def __init__(self, user_name, email_address, password, is_employee, is_employer, is_admin, cv_path, birth_date):
+    def __init__(self, user_name, email_address, password=None, is_employee=None, is_employer=None, is_admin=None,
+                 cv_path=None, birth_date=None, social_id=None):
         self.user_name = user_name
         self.email_address = email_address
         self.password = password
@@ -29,6 +30,7 @@ class Account(db.Model, UserMixin):
         self.is_admin = is_admin
         self.cv_path = cv_path
         self.birth_date = birth_date
+        self.social_id = social_id
 
     def create(self):
         db.session.add(self)
@@ -44,12 +46,12 @@ class Account(db.Model, UserMixin):
         return True
 
 
-
 login_manager = LoginManager()
 
 login_manager.login_view = "login"
 login_manager.login_message = u"Please log in to access this page."
 login_manager.refresh_view = "reauth"
+
 
 @login_manager.user_loader
 def load_user(id):

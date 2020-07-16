@@ -13,11 +13,13 @@
       <input type="text" id="email_address" name="email_address" required><br>
       <label for="password">Password:</label><br>
       <input type="password" id="password" name="password" required><br>
-      <label for="birthday">Birth date:</label><br>
+      <label for="birth_date">Birth date:</label><br>
       <input type="date" id="birth_date" name="birth_date" required><br>
       <label for="cv">CV:</label>
       <input type="file" id="cv" name="cv" required><br>
       <input type="submit" value="Submit">
+      <hr>
+      <button onclick="redirect('authorize/google')" type="button" name="create_job">GOOGLE SIGNUP</button>
     </form>
 {% endblock %}
 {% block script %}

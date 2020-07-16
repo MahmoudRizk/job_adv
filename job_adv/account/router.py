@@ -8,6 +8,7 @@ from werkzeug.utils import secure_filename
 
 import os
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login(*args, **kwargs):
     user = None
@@ -26,10 +27,12 @@ def login(*args, **kwargs):
     elif request.method == 'GET':
         return render_login_view()
 
+
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('job'))
+
 
 @app.route('/account')
 @login_required
@@ -37,6 +40,7 @@ def account():
     query = Account.query.all()
 
     return render_table_view(query)
+
 
 @app.route('/account/create', methods = ['GET', 'POST'])
 def account_create():
@@ -52,7 +56,6 @@ def account_create():
         is_admin = True if 'is_admin' in request.form else False
         cv_path = ""
 
-
         file = request.files['cv'] if 'cv' in request.files else None
         if file:
             filename = email_address
@@ -66,6 +69,7 @@ def account_create():
 
     elif request.method == 'GET':
         return render_form_view()
+
 
 @app.route('/account/cv/<name>', methods=['GET'])
 def account_cv(name):

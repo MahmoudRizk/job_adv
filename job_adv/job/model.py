@@ -17,4 +17,4 @@ class Job(db.Model):
     def create(self):
         db.session.add(self)
         db.session.commit()
-    
+
